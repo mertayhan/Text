@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>TEST</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            width: 1140px;
+            height: 1000px;
+            
+        }
+
+        .container {
+            margin-right: auto;
+            margin-left: auto;
+            width: 75%;
+       
+            
+        }
+    
+        
+        button{
+            color: black;
+            border:1px solid black;
+            border-radius: 4px;
+        }
+
+    
+        th{
+            
+            padding: 5px;
+        }
+        td{
+            padding: 5px;
+        }
+    </style>
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <table class="table">
+            <h1>Users Table</h1>
+            <thead>
+                <tr>
+                    <td><button type="button" id="getUsersAll">Get Users</button></td>
+                    <td><button type="button" id="getFirstName">Get FirstName</button></td>
+                    <td><button type="button" id="getLastName">Get LastName</button></td>
+                    <td><button type="button" id="getUserName">Get UserName</button></td>
+                    <td><button type="button" id="getAddress">Get Address</button></td>
+                    <td><button type="button" id="getPhoneNumber">Get PhoneNumer</button></td>
+                    <td><button type="button" id="getWebSite">Get WebSite</button></td>
+                    <td><button type="button" id="getCompanyName">Get CompanyName</button></td>
+                    <td><button type="button" id="getAlbumList">Get All AlbumList</button></td>
+                </tr>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Adress</th>
+                    <th scope="col">PhoneNumber</th>
+                    <th scope="col">WebSite</th>
+                    <th scope="col">CompanyName</th>
+                    <th scope="col">AlbumList</th>
+                </tr>
+               
+            </thead>
+            <tbody id="showUsers">
+               
+            </tbody>
+        
+        </table>
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <h1>Album List</h1>
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Album Name</th>
+                </tr>
+            </thead>
+            <tbody id="showAlbumList">
+               
+            </tbody>
+        </table>
+    </div>
+</body>
+
+
+
+<script src="script.js"></script>
+</html>
