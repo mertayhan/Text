@@ -8,6 +8,9 @@ document.getElementById("getWebSite").addEventListener("click", getWebSite);
 document.getElementById("getCompanyName").addEventListener("click", getCompanyName);
 document.getElementById("getAlbumList").addEventListener("click", getAlbumList);
 
+
+
+
 var request = function () {
     return new Promise(function (resolve, reject) {
         let xhr = new XMLHttpRequest();
@@ -28,22 +31,28 @@ var request = function () {
 }
 
 function requestAlbums() {
-    return new Promise(function (resolve, reject) {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://jsonplaceholder.typicode.com/albums", true);
-        xhr.onload = function () {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                resolve(xhr.response);
-            } else {
+
+     
+        return new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/albums", true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(xhr.response);
+                } else {
+                    reject(xhr.statusText);
+                }
+            }
+            xhr.onerror = function () {
                 reject(xhr.statusText);
             }
-        }
-        xhr.onerror = function () {
-            reject(xhr.statusText);
-        }
-        xhr.send();
-    })
+            xhr.send();
+        })
+    
+    
 }
+
+
 
 
 function getUsersAll() {
@@ -52,7 +61,7 @@ function getUsersAll() {
         let html = "";
         users.forEach(user => {
             var firstNamee = user.name.split(" ");
-            i= user.id;
+            i = user.id;
             html +=
                 `
                 <tr>
@@ -64,7 +73,7 @@ function getUsersAll() {
                 <td>${user.phone}</td>
                 <td>${user.website}</td>
                 <td>${user.company.name}</td>
-                <td><button type="button" id="getAlbumList${i}">Get AlbumList</button></td>
+                <td><button type="button" onclick="myFunction(${user.id})">Get AlbumList</button></td>
             </tr>
                 `
             document.querySelector("#showUsers").innerHTML = html;
@@ -253,25 +262,64 @@ function getCompanyName() {
 
 async function getAlbumList() {
 
-    let user = await request();
+
     let albums = await requestAlbums();
 
-    
-        albums = JSON.parse(albums);
 
-        let html = "";
-        albums.forEach(album => {
-            html +=
-                `
+    albums = JSON.parse(albums);
+
+    let html = "";
+
+
+    albums.forEach(album => {
+        html +=
+            `
             <tr>
             <td>${album.userId}</td>
             <td>${album.title}</td>
             </tr>  
             `
-            document.querySelector("#showAlbumList").innerHTML = html;
+        document.querySelector("#showAlbumList").innerHTML = html;
 
-        });
+    });
+
+}
+
+function myFunction(i) {
+   
+     setTimeout(() => {
+         requestAlbums()
+        .then(function (data) {
+            let albums = JSON.parse(data);
+           
+            function isEven(item){
+                return (item.userId==i)
+            }
+           let newAlbums= albums.filter(isEven);
+            
+
+            let html = "";
+
+            newAlbums.forEach(album => {
+                html +=
+             `
+                <tr>
+                <td>${album.userId}</td>
+                <td>${album.title}</td>
+                </tr>  
+                `
+
+                document.querySelector("#showAlbumList").innerHTML = html;
+            });
+
+
+            
+
+        }).catch(function (error) {
+            console.log(error);
+        })
+
+    }, 2000);
+
     
-      
-
 }
